@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>browser-back-button</title>
+  </head>
+  <body>
+    
+    <button onclick="show()">show</button>
+    <div id="popup" style="position:absolute;top:0;left:0;right:0;bottom:0;background:#fff;display:none;">
+        <h1>popup div</h1>
+        <p>use back button to hide</p>
+        <p>
+          <button onclick="history.back()">or click-me</button>
+        </p>
+    </div>
+    
+    <script src="index.bundle.js"></script>
+  </body>
+</html>

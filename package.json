@@ -1,0 +1,29 @@
+{
+  "name": "browser-back-button",
+  "version": "0.0.1",
+  "description": "browser back button manager",
+  "author": "fabionogueira <fabio.bacabal@gmail.com>",
+  "main": "src/lib.js",
+  "keywords": [
+    "browser",
+    "back",
+    "button",
+    "history"
+  ],
+  "tags": [
+    "browser",
+    "back",
+    "button",
+    "history"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fabionogueira/browser-back-button.git"
+  },
+  "scripts": {
+    "test": "node node_modules/webpack/bin/webpack.js test/index.js test/index.bundle.js"
+  },
+  "devDependencies": {
+    "webpack": "^3.10.0"
+  }
+}

@@ -1,0 +1,15 @@
+{
+    "esversion": 6,
+    "undef": true,
+    "unused": true,
+    "latedef": false,
+    "browser": true,
+    "globals": {
+        "require": true,
+        "module": true,
+        "console": true,
+        "process": true,
+        "__dirname": true,
+        "setTimeout": true
+    }
+}
