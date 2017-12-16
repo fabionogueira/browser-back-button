@@ -17,19 +17,31 @@ window.addEventListener('popstate', function(event){
 });
 
 export default {
-    on(callback) {
-        if (callback) {
+    on(id, callback) {
+        function register(){
             stateIndex++;
-            history.pushState({fn:stateIndex}, `state-${stateIndex}`, "");
-            callbacks[stateIndex] = callback;
+            history.pushState({fn:callback==id ? stateIndex : id}, `state-${stateIndex}`, "");
+            callbacks[callback==id ? stateIndex : id] = callback;
             
             stateIndex++;
             history.pushState('null', `state-${stateIndex}`, "");
         }
+
+        if (arguments.length==1){
+            callback = id;
+        }
+
+        if (callback) {
+            setTimeout(()=>{
+                register();
+            }, 10);
+        }
+
     },
 
-    off(callback) {
+    off(id) {
         let i;
+        let callback = typeof(id)=='string' ? callbacks[id] : id;
         
         if (callback) {
             for (i in callbacks){
