@@ -8,11 +8,31 @@
   <body>
     
     <button onclick="show()">show</button>
-    <div id="popup" style="position:absolute;top:0;left:0;right:0;bottom:0;background:#fff;display:none;">
+    <div id="popup" style="position:absolute;top:0;left:0;right:0;bottom:0;background:rgb(175, 175, 175);display:none;padding:20px">
         <h1>popup div</h1>
         <p>use back button to hide</p>
         <p>
-          <button onclick="history.back()">or click-me</button>
+          <button onclick="history.back()">history.back()</button>
+        </p>
+        <p>
+          <button onclick="window.close()">close with .off() method</button>
+        </p>
+        <p>
+          <a href="#test">test</a>
+        </p>
+        <p>
+            <button onclick="window.show2()">show2</button>
+        </p>
+    </div>
+
+    <div id="popup2" style="position:absolute;top:0;left:0;right:0;bottom:0;background:rgb(118, 184, 236);display:none;padding:20px">
+        <h1>popup 2 div</h1>
+        <p>use back button to hide</p>
+        <p>
+          <button onclick="window.close2()">close with .off() method</button>
+        </p>
+        <p>
+          <a href="#test">test</a>
         </p>
     </div>
     
