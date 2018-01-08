@@ -46,6 +46,10 @@ export default {
         if (callback) {
             for (i in callbacks){
                 if (callbacks[i]===callback){
+                    // retorna os dois pushState
+                    history.back();
+                    history.back();
+                    
                     return delete(callbacks[i]);
                 }
             }
