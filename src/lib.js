@@ -1,6 +1,7 @@
 let stateIndex = 0;
 let HISTORY = [];
 let activeState;
+let activeHistoryItem=false;
 let index = 1;
 
 function back(flag){
@@ -11,7 +12,14 @@ function back(flag){
 }
 
 window.addEventListener('popstate', function(event){
-    let his;
+    let his, r;
+    
+    if (activeHistoryItem){
+        r = activeHistoryItem;
+        
+        activeHistoryItem = null;
+        return afterCancel(r);
+    }
 
     if (activeState=='backAll' || activeState=='backAll1'){
         if (event.state == 'B-1' || event.state == 'B-2' || event.state == 'B-3' || event.state == 'B-4'){
@@ -36,10 +44,13 @@ window.addEventListener('popstate', function(event){
     // voltando
     if ( (activeState == 'B-2' && event.state == 'B-1') || (activeState == 'B-4' && event.state == 'B-3')){
         if (HISTORY.length>0){
-            his = HISTORY.pop();
+            his = HISTORY[HISTORY.length-1]; // HISTORY.pop();
+            
             if (his.callback){
-                his.callback();
-                back();
+                // cancela evento voltar
+                activeHistoryItem = his; //faz com que chame afterCancel();
+                history.go(1);
+                return;
             }
         } else {
             return back(1);
@@ -52,20 +63,35 @@ window.addEventListener('popstate', function(event){
     activeState = event.state;
 });
 
+function afterCancel(his){
+    // chama a função back registrada
+    let r = his.callback();
+
+    if (r!==false){
+        HISTORY.remove(his);
+    }else{
+        pushState(his.id);
+    }
+}
+
+function pushState(id){
+    history.pushState('B-' + index, id, '');
+    history.pushState('B-' + (index+1), id, '');
+    activeState = 'B-' + (index + 1);
+
+    index = index==1 ? 3 : 1;
+}
+
 back();
 
-export default {
+const BrowserBackButton = {
     on(id, callback) {
         if (arguments.length==1){
             callback = id;
             id = stateIndex++;
         }
         
-        history.pushState('B-' + index, id, '');
-        history.pushState('B-' + (index+1), id, '');
-        activeState = 'B-' + (index + 1);
-
-        index = index==1 ? 3 : 1;
+        pushState(id);
     
         HISTORY.push({
             callback: callback,
@@ -96,3 +122,5 @@ export default {
         }
     }
 };
+
+export default BrowserBackButton;
