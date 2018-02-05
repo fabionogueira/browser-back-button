@@ -1,6 +1,6 @@
 {
   "name": "browser-back-button",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "browser back button manager",
   "author": "fabionogueira <fabio.bacabal@gmail.com>",
   "main": "src/lib.js",

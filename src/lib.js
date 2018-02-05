@@ -1,8 +1,8 @@
-let stateIndex = 0;
-let HISTORY = [];
-let activeState;
-let activeHistoryItem=false;
-let index = 1;
+var stateIndex = 0;
+var HISTORY = [];
+var activeState;
+var activeHistoryItem=false;
+var index = 1;
 
 function back(flag){
     if (history.state == 'B-1' || history.state == 'B-2' || history.state == 'B-3' || history.state == 'B-4'){
@@ -12,7 +12,7 @@ function back(flag){
 }
 
 window.addEventListener('popstate', function(event){
-    let his, r;
+    var his, r;
     
     if (activeHistoryItem){
         r = activeHistoryItem;
@@ -65,7 +65,7 @@ window.addEventListener('popstate', function(event){
 
 function afterCancel(his){
     // chama a função back registrada
-    let r = his.callback();
+    var r = his.callback();
 
     if (r!==false){
         HISTORY.remove(his);
@@ -84,8 +84,8 @@ function pushState(id){
 
 back();
 
-const BrowserBackButton = {
-    on(id, callback) {
+var BrowserBackButton = {
+    on: function(id, callback) {
         if (arguments.length==1){
             callback = id;
             id = stateIndex++;
@@ -99,9 +99,9 @@ const BrowserBackButton = {
         });
     },
 
-    off(id) {
-        let i;
-        let callback = typeof(id)!='function' ? null : id;
+    off:function(id) {
+        var i;
+        var callback = typeof(id)!='function' ? null : id;
         
         if (!callback){
             for (i = 0; i < HISTORY.length; i++){
@@ -123,4 +123,6 @@ const BrowserBackButton = {
     }
 };
 
-export default BrowserBackButton;
+module.exports = BrowserBackButton;
+
+
